@@ -20,20 +20,18 @@ namespace RESTRecords.Controllers
         }
 
         // GET: api/<RecordsController>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
         [HttpGet]
-        public ActionResult<IEnumerable<Records>> GetAll()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<IEnumerable<Records>> GetAll(
+        [FromQuery] string? title = null,
+        [FromQuery] string? artist = null,
+        [FromQuery] int? duration = null,
+        [FromQuery] int? publicationYear = null)
         {
-            IEnumerable<Records> records = repo.GetAllRecords();
-            if (records.Any())
-            {
-                return Ok(records);
-            }
-            else
-            {
-                return NotFound();
-            }
+            return Ok(repo.GetAllRecords(
+                title, artist, duration, publicationYear));
         }
 
         //// GET api/<RecordsController>/5

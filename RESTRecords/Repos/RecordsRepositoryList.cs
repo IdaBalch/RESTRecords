@@ -20,10 +20,43 @@ namespace RESTRecords.Repos
             }
         }
 
-        public IEnumerable<Records> GetAllRecords()
+        public IEnumerable<Records> GetAllRecords(
+        string? title = null,
+        string? artist = null,
+        int? duration = null,
+        int? publicationYear = null)
         {
-            return _records;
-        }        
+            IEnumerable<Records> result = _records.ToList();
+
+            if (title != null)
+            {
+                result = result.Where(record =>
+                    record.Title.Contains(
+                        title,
+                        StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (artist != null)
+            {
+                result = result.Where(record =>
+                    record.Artist.Contains(
+                        artist,
+                        StringComparison.OrdinalIgnoreCase));
+            }            
+
+            if (duration != null)
+            {
+                result = result.Where(record => record.Duration == duration);
+            }
+
+            if (publicationYear != null)
+            {
+                result = result.Where(record =>
+                    record.PublicationYear == publicationYear);
+            }
+
+            return result; 
+        }
 
         public Records AddRecords(Records Record)
         {
