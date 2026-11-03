@@ -23,7 +23,7 @@ namespace RESTRecords.Repos
         public IEnumerable<Records> GetAllRecords(
         string? title = null,
         string? artist = null,
-        int? duration = null,
+        int? maxDuration = null,
         int? publicationYear = null)
         {
             IEnumerable<Records> result = _records.ToList();
@@ -44,9 +44,9 @@ namespace RESTRecords.Repos
                         StringComparison.OrdinalIgnoreCase));
             }            
 
-            if (duration != null)
+            if (maxDuration != null)
             {
-                result = result.Where(record => record.Duration == duration);
+                result = result.Where(record => record.Duration <= maxDuration);
             }
 
             if (publicationYear != null)

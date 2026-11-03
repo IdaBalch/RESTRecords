@@ -27,11 +27,11 @@ namespace RESTRecords.Controllers
         public ActionResult<IEnumerable<Records>> GetAll(
         [FromQuery] string? title = null,
         [FromQuery] string? artist = null,
-        [FromQuery] int? duration = null,
+        [FromQuery] int? maxDuration = null,
         [FromQuery] int? publicationYear = null)
         {
             return Ok(repo.GetAllRecords(
-                title, artist, duration, publicationYear));
+                title, artist, maxDuration, publicationYear));
         }
 
         //// GET api/<RecordsController>/5
