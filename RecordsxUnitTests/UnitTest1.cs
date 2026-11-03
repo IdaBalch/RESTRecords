@@ -109,17 +109,16 @@ namespace RecordsxUnitTests
         }
 
         [Fact]
-        public void GetAllRecords_FilterByDuration_ShouldReturnMatchingRecords()
+        public void GetAllRecords_FilterByMaxDuration_ShouldReturnRecordsAtOrBelowLimit()
         {
             // Arrange
             var repo = new RecordsRepositoryList(true);
 
             // Act
-            var result = repo.GetAllRecords(duration: 210).ToList();
+            var result = repo.GetAllRecords(maxDuration: 210).ToList();
 
             // Assert
-            Assert.Single(result);
-            Assert.Equal(210, result[0].Duration);
+            Assert.Equal(new[] { 180, 210 }, result.Select(record => record.Duration).OrderBy(duration => duration));
         }
 
         [Fact]
