@@ -7,6 +7,8 @@ using RESTRecords.Repos;
 namespace RESTRecords.Controllers
 {    
 
+    //Jeg skriver lige en kommentar så jeg kan pushe noget fra main 
+
     [Route("api/[controller]")]
     [ApiController]
     public class RecordsController : ControllerBase
