@@ -21,17 +21,17 @@ namespace RESTRecords.Repos
         }
 
         public IEnumerable<Records> GetAllRecords(
-        string? title = null,
-        string? artist = null,
-        int? maxDuration = null,
-        int? publicationYear = null)
+    string? title = null,
+    string? artist = null,
+    int? maxDuration = null,
+    int? publicationYear = null)
         {
             IEnumerable<Records> result = _records.ToList();
 
             if (title != null)
             {
                 result = result.Where(record =>
-                    record.Title.Contains(
+                    (record.Title ?? "").Contains(
                         title,
                         StringComparison.OrdinalIgnoreCase));
             }
@@ -39,14 +39,15 @@ namespace RESTRecords.Repos
             if (artist != null)
             {
                 result = result.Where(record =>
-                    record.Artist.Contains(
+                    (record.Artist ?? "").Contains(
                         artist,
                         StringComparison.OrdinalIgnoreCase));
-            }            
+            }
 
             if (maxDuration != null)
             {
-                result = result.Where(record => record.Duration <= maxDuration);
+                result = result.Where(record =>
+                    record.Duration <= maxDuration);
             }
 
             if (publicationYear != null)
@@ -55,7 +56,7 @@ namespace RESTRecords.Repos
                     record.PublicationYear == publicationYear);
             }
 
-            return result; 
+            return result;
         }
 
         public Records AddRecords(Records Record)
