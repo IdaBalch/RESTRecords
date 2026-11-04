@@ -36,6 +36,17 @@ namespace RESTRecords.Controllers
                 title, artist, maxDuration, publicationYear));
         }
 
+        //POST records to the repository
+        // POST api/<RecordsController>
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public ActionResult<Records> Post([FromBody] Records value)
+        {
+            var addedRecord = repo.AddRecords(value);
+            return CreatedAtAction(nameof(GetAll), new { id = addedRecord.Id }, addedRecord);
+
+        }
+
         //// GET api/<RecordsController>/5
         //[HttpGet("{id}")]
         //public string Get(int id)
@@ -43,11 +54,7 @@ namespace RESTRecords.Controllers
         //    return "value";
         //}
 
-        //// POST api/<RecordsController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
+
 
         //// PUT api/<RecordsController>/5
         //[HttpPut("{id}")]
