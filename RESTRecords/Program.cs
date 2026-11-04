@@ -29,7 +29,9 @@ builder.Services.AddOpenApi();
 builder.Services.AddSingleton<RecordsRepositoryList>(
     new RecordsRepositoryList(true)
 );
-builder.Services.AddSingleton<UsersRepositoryList>();
+builder.Services.AddSingleton<UsersRepositoryList>(
+    new UsersRepositoryList(true)
+);
 
 
 var jwtSettings = builder.Configuration.GetSection("Jwt");
