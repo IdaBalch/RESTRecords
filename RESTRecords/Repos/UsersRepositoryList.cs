@@ -17,7 +17,7 @@ namespace RESTRecords.Repos
                     StringComparison.OrdinalIgnoreCase));
         }
 
-        public User Add(User user)
+        public User AddUser(User user)
         {
             if (GetByUsername(user.Username) != null)
             {

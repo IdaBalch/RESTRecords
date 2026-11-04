@@ -12,6 +12,7 @@ namespace RecordsxUnitTests
         {
             _repo = new RecordsRepositoryList();
         }
+
         [Fact]
 
         public void Constructor_WithTestData_ShouldInitializeWithTestData()
